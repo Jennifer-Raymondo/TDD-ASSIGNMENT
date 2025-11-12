@@ -1,25 +1,15 @@
 // borrow_book.js
 function borrow_book(book_title, available_books) {
-    // Input validation
-    if (typeof book_title !== 'string') {
-        throw new Error('book_title must be a string');
-    }
-    if (!Array.isArray(available_books)) {
-        throw new Error('available_books must be an array');
-    }
+    // Find the book in the list
+    const index = available_books.indexOf(book_title);
 
-    // Find the book index (exact match)
-    const idx = available_books.findIndex(title => title === book_title);
-
-    if (idx === -1) {
-        // Not found
+    // If book not found
+    if (index === -1) {
         return `Sorry, '${book_title}' is not available.`;
     }
 
-    // Remove the book from the original array (side-effect required by spec)
-    available_books.splice(idx, 1);
-
-    // Return success message
+    // If found, remove it
+    available_books.splice(index, 1);
     return `You have borrowed '${book_title}'.`;
 }
 
